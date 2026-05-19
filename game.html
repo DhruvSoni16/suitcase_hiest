@@ -519,38 +519,100 @@
       letter-spacing: 1.5px;
     }
 
-    /* ===== Toast ===== */
-    .toast {
+    /* ===== Bag fade-out after reveal ===== */
+    .case.revealed .lid,
+    .case.revealed .body-pc,
+    .case.revealed .interior,
+    .case.revealed .handle,
+    .case.revealed .latch,
+    .case.revealed .stud,
+    .case.revealed .body-hud {
+      opacity: 0;
+      transition: opacity 0.9s cubic-bezier(.4,.2,.2,1);
+    }
+
+    /* ===== Reveal card (flip) ===== */
+    .reveal-card {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%) scale(0.5);
-      background: rgba(10, 30, 18, 0.95);
+      width: 78%;
+      max-width: 380px;
+      aspect-ratio: 3 / 2;
+      transform: translate(-50%, -30%) scale(0);
+      opacity: 0;
+      perspective: 1400px;
+      z-index: 30;
+      pointer-events: none;
+      transition:
+        transform 1s 0.7s cubic-bezier(.34,1.56,.64,1),
+        opacity 0.5s 0.7s ease-out;
+    }
+    .case.open .reveal-card {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .reveal-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 1s cubic-bezier(.4,.2,.2,1);
+    }
+    .reveal-card.flipped .reveal-inner { transform: rotateY(180deg); }
+
+    .reveal-face {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border-radius: 14px;
+      padding: 18px 24px;
+      text-align: center;
+      box-shadow: 0 0 60px rgba(92, 217, 124, 0.35), 0 12px 30px rgba(0,0,0,0.6);
+    }
+    .reveal-front {
+      background: rgba(10, 30, 18, 0.96);
       border: 1.5px solid #5cd97c;
       color: #9af0b0;
-      padding: 18px 32px;
-      border-radius: 10px;
       font-size: 18px;
       font-weight: 500;
       letter-spacing: 3px;
       text-transform: uppercase;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.5s cubic-bezier(.34,1.56,.64,1);
-      z-index: 20;
       text-shadow: 0 0 10px rgba(92, 217, 124, 0.7);
-      box-shadow: 0 0 50px rgba(92, 217, 124, 0.5);
-      white-space: nowrap;
     }
-    .toast.show {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-      animation: toast-flicker 1.8s;
+    .reveal-back {
+      background: rgba(8, 18, 30, 0.97);
+      border: 1.5px solid var(--accent, #6ad0ff);
+      color: var(--accent, #6ad0ff);
+      transform: rotateY(180deg);
+      box-shadow: 0 0 60px var(--accent-glow, rgba(106, 208, 255, 0.45)), 0 12px 30px rgba(0,0,0,0.6);
     }
-    @keyframes toast-flicker {
-      0%, 100% { opacity: 1; }
-      20%, 60% { opacity: 0.7; }
-      40%, 80% { opacity: 1; }
+    .clue-label {
+      font-size: 11px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      opacity: 0.75;
+      margin-bottom: 12px;
+    }
+    .clue-text {
+      font-size: 17px;
+      line-height: 1.4;
+      letter-spacing: 1.5px;
+      font-weight: 500;
+      text-shadow: 0 0 12px var(--accent-glow, rgba(106, 208, 255, 0.6));
+    }
+    .clue-text .target {
+      display: block;
+      margin-top: 6px;
+      font-size: 22px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 700;
     }
 
     .error-screen {
@@ -665,7 +727,18 @@
         </div>
       </div>
     </div>
-    <div class="toast" id="toast">You cracked the code</div>
+    <div class="reveal-card" id="reveal-card">
+      <div class="reveal-inner">
+        <div class="reveal-face reveal-front">You cracked the code</div>
+        <div class="reveal-face reveal-back">
+          <div class="clue-label">Next Clue</div>
+          <div class="clue-text" id="clue-text">
+            You'll find your next clue
+            <span class="target" id="clue-target">…</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="meta">
@@ -734,14 +807,25 @@
     })[c]);
   }
 
+  // Team-specific next-round clues
+  const CLUES = {
+    erudite: "behind the Screen",
+    amity: "behind the WiFi Router",
+    candor: "under the Fan",
+    dauntless: "inside the Plants",
+  };
+
   // -------- game logic --------
   function initGame(team) {
     const caseEl = document.getElementById("case");
     const display = document.getElementById("display");
-    const toast = document.getElementById("toast");
+    const revealCard = document.getElementById("reveal-card");
+    const clueTarget = document.getElementById("clue-target");
     const attemptsEl = document.getElementById("attempts");
     const bestEl = document.getElementById("best");
     const numpad = document.getElementById("numpad");
+
+    clueTarget.textContent = CLUES[team] || "at the next location";
 
     let input = [];
     let attempts = 0;
@@ -860,14 +944,17 @@
           success();
           setTimeout(() => {
             caseEl.classList.add("open");
-            toast.classList.add("show");
             thud();
           }, 250);
+          // Card emerges ~700ms after .open via CSS transition delay,
+          // then fade bag and flip the card to reveal the clue.
+          setTimeout(() => caseEl.classList.add("revealed"), 1900);
+          setTimeout(() => revealCard.classList.add("flipped"), 2600);
           if (best === null || attempts < best) {
             best = attempts;
             bestEl.textContent = best;
           }
-          setTimeout(() => reset(), 4500);
+          setTimeout(() => reset(), 7500);
         } else {
           renderDisplay("denied");
           deny();
@@ -900,8 +987,9 @@
       solved = false;
       submitting = false;
       input = [];
-      toast.classList.remove("show");
+      revealCard.classList.remove("flipped");
       caseEl.classList.remove("open");
+      caseEl.classList.remove("revealed");
       for (let i = 0; i < 3; i++) {
         setDial(i, Math.floor(Math.random() * 10), true);
       }
