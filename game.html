@@ -29,13 +29,13 @@
     }
     .heist-stage {
       width: 100%;
-      max-width: 560px;
-      padding: 28px 20px;
+      max-width: 720px;
+      padding: 24px 16px;
       position: relative;
     }
     .heist-header {
       text-align: center;
-      margin-bottom: 18px;
+      margin-bottom: 22px;
       position: relative;
       padding-top: 28px;
     }
@@ -56,7 +56,7 @@
       display: inline-block;
       padding: 6px 18px;
       border-radius: 4px;
-      font-size: 22px;
+      font-size: 24px;
       letter-spacing: 6px;
       text-transform: uppercase;
       margin-bottom: 8px;
@@ -69,9 +69,7 @@
       font-size: 14px;
       letter-spacing: 3px;
     }
-    .team-tag.error {
-      color: #ff5a4a;
-    }
+    .team-tag.error { color: #ff5a4a; }
     .heist-title {
       font-size: 11px;
       font-weight: 500;
@@ -88,155 +86,178 @@
       letter-spacing: 2px;
       text-transform: uppercase;
     }
+
+    /* ===== Suitcase scene ===== */
     .case-wrap {
       position: relative;
       width: 100%;
-      max-width: 460px;
+      max-width: 680px;
       margin: 0 auto;
-      aspect-ratio: 1.5 / 1;
-      perspective: 1400px;
+      aspect-ratio: 1 / 1.05;
+      perspective: 1800px;
     }
     .case {
       position: relative;
       width: 100%;
       height: 100%;
       transform-style: preserve-3d;
-      animation: idle 5s ease-in-out infinite;
+      animation: idle 6s ease-in-out infinite;
     }
     @keyframes idle {
-      0%, 100% { transform: rotateX(8deg) rotateY(-2deg); }
-      50% { transform: rotateX(9deg) rotateY(2deg); }
+      0%, 100% { transform: rotateX(6deg) rotateY(-1.5deg); }
+      50% { transform: rotateX(7deg) rotateY(1.5deg); }
     }
-    .case.shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97); }
+    .case.shake { animation: shake 0.55s cubic-bezier(.36,.07,.19,.97); }
     @keyframes shake {
-      10%, 90% { transform: rotateX(8deg) translateX(-2px); }
-      20%, 80% { transform: rotateX(8deg) translateX(4px); }
-      30%, 50%, 70% { transform: rotateX(8deg) translateX(-7px); }
-      40%, 60% { transform: rotateX(8deg) translateX(7px); }
+      10%, 90% { transform: rotateX(6deg) translateX(-3px); }
+      20%, 80% { transform: rotateX(6deg) translateX(5px); }
+      30%, 50%, 70% { transform: rotateX(6deg) translateX(-9px); }
+      40%, 60% { transform: rotateX(6deg) translateX(9px); }
     }
+
     .lid, .body-pc {
       position: absolute;
-      left: 6%;
-      right: 6%;
-      background: linear-gradient(180deg, #3a2a1a 0%, #2a1d10 50%, #1f1408 100%);
+      left: 4%;
+      right: 4%;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(255, 200, 150, 0.06) 0%, transparent 70%),
+        linear-gradient(180deg, #4a3520 0%, #3a2818 30%, #2a1d10 60%, #1f1408 100%);
       border: 1px solid #0a0604;
       box-shadow:
-        inset 0 2px 0 rgba(255, 200, 150, 0.08),
-        inset 0 -2px 0 rgba(0, 0, 0, 0.5),
-        0 12px 30px rgba(0, 0, 0, 0.6);
+        inset 0 3px 0 rgba(255, 200, 150, 0.12),
+        inset 0 -3px 0 rgba(0, 0, 0, 0.6),
+        inset 0 0 60px rgba(0, 0, 0, 0.4),
+        0 20px 50px rgba(0, 0, 0, 0.7);
     }
     .lid {
-      top: 4%;
-      height: 38%;
-      border-radius: 14px 14px 4px 4px;
+      top: 2%;
+      height: 28%;
+      border-radius: 18px 18px 4px 4px;
       transform-origin: bottom center;
       transform: rotateX(0deg);
-      transition: transform 1.4s cubic-bezier(.68,-0.05,.27,1.2);
+      transition: transform 1.5s cubic-bezier(.68,-0.05,.27,1.2);
       z-index: 2;
     }
-    .case.open .lid { transform: rotateX(-115deg); }
+    .case.open .lid { transform: rotateX(-120deg); }
     .body-pc {
-      top: 38%;
-      height: 56%;
-      border-radius: 4px 4px 14px 14px;
+      top: 28%;
+      height: 70%;
+      border-radius: 4px 4px 18px 18px;
     }
+    /* leather stitching detail */
     .lid::before, .body-pc::after {
       content: "";
       position: absolute;
-      left: 12px;
-      right: 12px;
-      border: 1px dashed rgba(255, 200, 150, 0.15);
-      border-radius: 8px;
+      left: 16px;
+      right: 16px;
+      border: 1px dashed rgba(255, 200, 150, 0.18);
+      border-radius: 10px;
       pointer-events: none;
     }
-    .lid::before { top: 8px; bottom: 8px; }
-    .body-pc::after { top: 8px; bottom: 8px; border-radius: 4px 4px 8px 8px; }
+    .lid::before { top: 10px; bottom: 10px; }
+    .body-pc::after { top: 10px; bottom: 10px; border-radius: 4px 4px 12px 12px; }
+
+    /* handle */
     .handle {
       position: absolute;
-      top: -10px;
+      top: -16px;
       left: 50%;
       transform: translateX(-50%);
-      width: 90px;
-      height: 22px;
-      background: linear-gradient(180deg, #4a3520 0%, #2a1d10 100%);
+      width: 130px;
+      height: 30px;
+      background: linear-gradient(180deg, #5a4028 0%, #3a2818 50%, #2a1d10 100%);
       border: 1px solid #0a0604;
-      border-radius: 12px 12px 4px 4px;
-      box-shadow: inset 0 1px 0 rgba(255,200,150,0.1);
+      border-radius: 14px 14px 4px 4px;
+      box-shadow:
+        inset 0 1px 0 rgba(255,200,150,0.15),
+        inset 0 -2px 0 rgba(0,0,0,0.4);
     }
     .handle::after {
       content: "";
       position: absolute;
-      inset: 4px 8px 0;
-      border: 1px solid rgba(0,0,0,0.4);
-      border-radius: 8px 8px 0 0;
+      inset: 5px 10px 0;
+      border: 1px solid rgba(0,0,0,0.5);
+      border-radius: 9px 9px 0 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.2) 100%);
     }
+
+    /* corner studs (brass) */
     .stud {
       position: absolute;
-      width: 14px;
-      height: 14px;
-      background: radial-gradient(circle at 35% 35%, #c9a878 0%, #6b4a28 60%, #3a2410 100%);
+      width: 18px;
+      height: 18px;
+      background: radial-gradient(circle at 35% 35%, #e8c98a 0%, #b8915a 30%, #6b4a28 70%, #2a1808 100%);
       border-radius: 50%;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.6);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.7), inset 0 -1px 1px rgba(0,0,0,0.4);
     }
-    .stud.tl { top: 8px; left: 8px; }
-    .stud.tr { top: 8px; right: 8px; }
-    .stud.bl { bottom: 8px; left: 8px; }
-    .stud.br { bottom: 8px; right: 8px; }
+    .stud.tl { top: 10px; left: 10px; }
+    .stud.tr { top: 10px; right: 10px; }
+    .stud.bl { bottom: 10px; left: 10px; }
+    .stud.br { bottom: 10px; right: 10px; }
+
+    /* ===== Lock plate (on lid) ===== */
     .lock-plate {
       position: absolute;
-      top: 24%;
+      top: 28%;
       left: 50%;
       transform: translateX(-50%);
-      width: 58%;
-      max-width: 240px;
-      height: 78px;
-      background: linear-gradient(180deg, #d9c598 0%, #a08858 50%, #6b5530 100%);
-      border: 1px solid #3a2a10;
-      border-radius: 10px;
+      width: 60%;
+      max-width: 360px;
+      height: 110px;
+      background:
+        linear-gradient(180deg, #e8d49c 0%, #c9a866 30%, #a08858 60%, #6b5530 100%);
+      border: 1.5px solid #3a2a10;
+      border-radius: 12px;
       box-shadow:
-        inset 0 1px 0 rgba(255, 240, 200, 0.5),
-        inset 0 -2px 4px rgba(0, 0, 0, 0.4),
-        0 4px 8px rgba(0, 0, 0, 0.5);
+        inset 0 2px 0 rgba(255, 240, 200, 0.6),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.5),
+        0 6px 12px rgba(0, 0, 0, 0.6);
       z-index: 3;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      padding: 0 10px;
+      gap: 10px;
+      padding: 0 14px;
+    }
+    .lock-plate::before {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border: 1px solid rgba(58, 42, 16, 0.4);
+      border-radius: 9px;
+      pointer-events: none;
     }
     .dial {
-      width: 38px;
-      height: 60px;
-      background: #0d0d0d;
-      border: 1px solid #2a2a2a;
-      border-radius: 6px;
+      width: 56px;
+      height: 86px;
+      background: #0a0a0a;
+      border: 1.5px solid #2a2a2a;
+      border-radius: 8px;
       overflow: hidden;
       position: relative;
       box-shadow:
-        inset 0 0 12px rgba(0, 0, 0, 0.9),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
-      cursor: pointer;
-      flex: 1;
-      max-width: 56px;
+        inset 0 0 16px rgba(0, 0, 0, 0.95),
+        inset 0 2px 0 rgba(255, 255, 255, 0.06);
+      flex-shrink: 0;
     }
     .dial::before, .dial::after {
       content: "";
       position: absolute;
       left: 0;
       right: 0;
-      height: 14px;
+      height: 20px;
       pointer-events: none;
       z-index: 2;
     }
-    .dial::before { top: 0; background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, transparent 100%); }
-    .dial::after { bottom: 0; background: linear-gradient(0deg, rgba(0,0,0,0.9) 0%, transparent 100%); }
+    .dial::before { top: 0; background: linear-gradient(180deg, rgba(0,0,0,0.95) 0%, transparent 100%); }
+    .dial::after { bottom: 0; background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, transparent 100%); }
     .dial-window {
       position: absolute;
       top: 50%;
       left: 0;
       right: 0;
       height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(255,180,80,0.4), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255,180,80,0.5), transparent);
       transform: translateY(-1px);
       z-index: 3;
       pointer-events: none;
@@ -249,60 +270,68 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: transform 0.35s cubic-bezier(.34,1.4,.64,1);
+      transition: transform 0.4s cubic-bezier(.34,1.4,.64,1);
     }
     .dial-num {
-      height: 60px;
+      height: 86px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: "Courier New", monospace;
-      font-size: 30px;
+      font-size: 44px;
       font-weight: 700;
-      color: #e8d9b0;
-      text-shadow: 0 0 6px rgba(255, 180, 80, 0.5);
+      color: #f0dca0;
+      text-shadow: 0 0 8px rgba(255, 180, 80, 0.6);
       flex-shrink: 0;
     }
     .dial.active {
       box-shadow:
-        inset 0 0 12px rgba(0,0,0,0.9),
-        0 0 0 2px var(--accent, #6ad0ff),
-        0 0 12px rgba(106,208,255,0.6);
+        inset 0 0 16px rgba(0,0,0,0.95),
+        0 0 0 2.5px var(--accent, #6ad0ff),
+        0 0 18px var(--accent-glow, rgba(106,208,255,0.7));
     }
+
+    /* latches */
     .latch {
       position: absolute;
-      top: 28%;
-      width: 36px;
-      height: 50px;
-      background: linear-gradient(180deg, #d9c598 0%, #8a7548 100%);
-      border: 1px solid #3a2a10;
-      border-radius: 6px;
-      box-shadow: inset 0 1px 0 rgba(255,240,200,0.5), 0 2px 4px rgba(0,0,0,0.5);
+      top: 30%;
+      width: 50px;
+      height: 70px;
+      background:
+        linear-gradient(180deg, #e8d49c 0%, #b8915a 50%, #8a6a38 100%);
+      border: 1.5px solid #3a2a10;
+      border-radius: 8px;
+      box-shadow:
+        inset 0 2px 0 rgba(255,240,200,0.6),
+        0 3px 6px rgba(0,0,0,0.6);
       z-index: 3;
     }
-    .latch.left { left: 12%; }
-    .latch.right { right: 12%; }
+    .latch.left { left: 8%; }
+    .latch.right { right: 8%; }
     .latch::after {
       content: "";
       position: absolute;
-      inset: 8px 6px;
-      background: #0d0d0d;
-      border-radius: 3px;
-      box-shadow: inset 0 0 6px rgba(0,0,0,0.8);
+      inset: 10px 8px;
+      background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+      border-radius: 4px;
+      box-shadow: inset 0 0 8px rgba(0,0,0,0.9);
     }
+
+    /* ===== Body interior (visible when open) ===== */
     .interior {
       position: absolute;
-      top: 38%;
-      left: 6%;
-      right: 6%;
-      height: 56%;
+      top: 28%;
+      left: 4%;
+      right: 4%;
+      height: 70%;
       background:
-        radial-gradient(ellipse at 50% 30%, rgba(255, 220, 120, 0.4) 0%, transparent 70%),
+        radial-gradient(ellipse at 50% 30%, rgba(255, 220, 120, 0.5) 0%, transparent 70%),
         linear-gradient(180deg, #2a1a08 0%, #1a0f04 100%);
-      border-radius: 4px 4px 14px 14px;
+      border-radius: 4px 4px 18px 18px;
       overflow: hidden;
       opacity: 0;
       transition: opacity 0.6s 0.4s;
+      z-index: 1;
     }
     .case.open .interior { opacity: 1; }
     .loot {
@@ -315,58 +344,73 @@
     }
     .case.open .loot { transform: translate(-50%, -50%) scale(1); }
     .gold-stack {
-      width: 120px;
-      height: 60px;
+      width: 180px;
+      height: 90px;
       background: linear-gradient(180deg, #ffd966 0%, #c99b1f 100%);
       border: 1px solid #8a6a10;
-      border-radius: 4px;
+      border-radius: 6px;
       box-shadow:
-        0 -8px 0 -2px #e6c44a,
-        0 -16px 0 -4px #ccab2c,
-        0 8px 16px rgba(255, 200, 50, 0.4);
-      margin: 0 auto 12px;
+        0 -10px 0 -2px #e6c44a,
+        0 -22px 0 -4px #ccab2c,
+        0 12px 24px rgba(255, 200, 50, 0.5);
+      margin: 0 auto 16px;
     }
     .loot-label {
-      font-size: 11px;
+      font-size: 13px;
       color: #ffd966;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       text-transform: uppercase;
+      text-shadow: 0 0 12px rgba(255, 217, 102, 0.6);
     }
-    .hud {
-      margin-top: 22px;
-      background: rgba(20, 28, 44, 0.7);
-      border: 1px solid rgba(106, 208, 255, 0.2);
-      border-radius: 10px;
-      padding: 16px;
-      position: relative;
-      z-index: 5;
+
+    /* ===== HUD embedded on the body ===== */
+    .body-hud {
+      position: absolute;
+      top: 38%;
+      left: 12%;
+      right: 12%;
+      bottom: 12%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      z-index: 4;
+      transition: opacity 0.4s;
+    }
+    .case.open .body-hud { opacity: 0; pointer-events: none; }
+
+    .display-frame {
+      background:
+        linear-gradient(180deg, #d9c08a 0%, #a08858 50%, #6b5530 100%);
+      border: 1.5px solid #3a2a10;
+      border-radius: 8px;
+      padding: 6px;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 240, 200, 0.4),
+        0 4px 8px rgba(0, 0, 0, 0.5);
     }
     .display {
       background: #050810;
       border: 1px solid #1a2438;
-      border-radius: 6px;
-      padding: 10px;
+      border-radius: 4px;
+      padding: 12px;
       text-align: center;
       font-family: "Courier New", monospace;
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 700;
       color: var(--accent, #6ad0ff);
-      letter-spacing: 12px;
-      text-shadow: 0 0 8px rgba(106, 208, 255, 0.6);
-      margin-bottom: 12px;
-      min-height: 44px;
-      box-shadow: inset 0 0 16px rgba(106, 208, 255, 0.1);
+      letter-spacing: 16px;
+      text-shadow: 0 0 10px var(--accent-glow, rgba(106, 208, 255, 0.7));
+      min-height: 52px;
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
     }
     .display.denied {
       color: #ff5a4a !important;
-      text-shadow: 0 0 8px rgba(255, 90, 74, 0.6) !important;
-      border-color: #5a1818;
+      text-shadow: 0 0 10px rgba(255, 90, 74, 0.7) !important;
       animation: deny-flash 0.5s;
     }
     .display.success {
       color: #5cd97c !important;
-      text-shadow: 0 0 12px rgba(92, 217, 124, 0.8) !important;
-      border-color: #185a28;
+      text-shadow: 0 0 14px rgba(92, 217, 124, 0.8) !important;
       animation: success-flicker 1.2s;
     }
     .display.waiting {
@@ -381,72 +425,109 @@
       0%, 30%, 50%, 70%, 100% { opacity: 1; }
       40%, 60% { opacity: 0.5; }
     }
+
     .numpad {
+      flex: 1;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
-      margin-bottom: 10px;
+      min-height: 0;
     }
     .num-btn {
-      background: linear-gradient(180deg, #1e2a44 0%, #131a2b 100%);
-      border: 1px solid rgba(106, 208, 255, 0.25);
-      border-radius: 6px;
-      color: #e8eef7;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(255, 200, 150, 0.08), transparent 70%),
+        linear-gradient(180deg, #3a2818 0%, #2a1d10 60%, #1a1108 100%);
+      border: 1.5px solid #1a1004;
+      border-radius: 8px;
+      color: #f0dca0;
       font-family: "Courier New", monospace;
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 700;
-      padding: 14px 0;
       cursor: pointer;
       transition: all 0.12s;
       user-select: none;
       -webkit-tap-highlight-color: transparent;
+      box-shadow:
+        inset 0 2px 0 rgba(255, 200, 150, 0.18),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.5),
+        0 3px 6px rgba(0, 0, 0, 0.6);
+      text-shadow: 0 0 6px rgba(255, 180, 80, 0.4);
+      padding: 0;
+      min-height: 0;
     }
-    .num-btn:hover {
-      background: linear-gradient(180deg, #2a3a5c 0%, #1a2440 100%);
-      border-color: rgba(106, 208, 255, 0.5);
-      box-shadow: 0 0 12px rgba(106, 208, 255, 0.2);
+    .num-btn:hover:not(:disabled) {
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(255, 200, 150, 0.15), transparent 70%),
+        linear-gradient(180deg, #4a3520 0%, #3a2818 60%, #2a1d10 100%);
+      color: var(--accent, #6ad0ff);
+      text-shadow: 0 0 8px var(--accent-glow, rgba(106, 208, 255, 0.6));
+      border-color: var(--accent, #6ad0ff);
     }
-    .num-btn:active { transform: scale(0.94); }
+    .num-btn:active:not(:disabled) {
+      transform: translateY(1px);
+      box-shadow:
+        inset 0 2px 4px rgba(0, 0, 0, 0.6),
+        inset 0 -1px 0 rgba(255, 200, 150, 0.05);
+    }
     .num-btn:disabled { opacity: 0.4; cursor: not-allowed; }
     .num-btn.clear { color: #ff8a7a; }
-    .num-btn.submit {
-      background: linear-gradient(180deg, #1a4a28 0%, #0d2a18 100%);
-      border-color: rgba(92, 217, 124, 0.5);
-      color: #9af0b0;
+    .num-btn.clear:hover:not(:disabled) {
+      color: #ff5a4a;
+      border-color: #ff5a4a;
+      text-shadow: 0 0 8px rgba(255, 90, 74, 0.6);
     }
-    .num-btn.submit:hover {
-      background: linear-gradient(180deg, #2a6a3c 0%, #1a4028 100%);
-      box-shadow: 0 0 12px rgba(92, 217, 124, 0.3);
+    .num-btn.submit { color: #9af0b0; }
+    .num-btn.submit:hover:not(:disabled) {
+      color: #5cd97c;
+      border-color: #5cd97c;
+      text-shadow: 0 0 8px rgba(92, 217, 124, 0.6);
     }
+
+    /* ===== Meta bar (outside the case) ===== */
     .meta {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       font-size: 11px;
       color: #7a8aa3;
-      letter-spacing: 1px;
-      margin-top: 8px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 18px;
+      padding: 0 12px;
     }
     .meta strong { color: var(--accent, #6ad0ff); font-weight: 500; }
+    .hint-pill {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(106, 208, 255, 0.08);
+      border: 1px solid rgba(106, 208, 255, 0.25);
+      border-radius: 12px;
+      font-size: 10px;
+      color: var(--accent, #6ad0ff);
+      letter-spacing: 1.5px;
+    }
+
+    /* ===== Toast ===== */
     .toast {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) scale(0.5);
       background: rgba(10, 30, 18, 0.95);
-      border: 1px solid #5cd97c;
+      border: 1.5px solid #5cd97c;
       color: #9af0b0;
-      padding: 16px 28px;
-      border-radius: 8px;
-      font-size: 16px;
+      padding: 18px 32px;
+      border-radius: 10px;
+      font-size: 18px;
       font-weight: 500;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       text-transform: uppercase;
       opacity: 0;
       pointer-events: none;
       transition: all 0.5s cubic-bezier(.34,1.56,.64,1);
       z-index: 20;
-      text-shadow: 0 0 8px rgba(92, 217, 124, 0.6);
-      box-shadow: 0 0 40px rgba(92, 217, 124, 0.4);
+      text-shadow: 0 0 10px rgba(92, 217, 124, 0.7);
+      box-shadow: 0 0 50px rgba(92, 217, 124, 0.5);
       white-space: nowrap;
     }
     .toast.show {
@@ -459,16 +540,7 @@
       20%, 60% { opacity: 0.7; }
       40%, 80% { opacity: 1; }
     }
-    .hint-pill {
-      display: inline-block;
-      padding: 3px 10px;
-      background: rgba(106, 208, 255, 0.1);
-      border: 1px solid rgba(106, 208, 255, 0.3);
-      border-radius: 12px;
-      font-size: 10px;
-      color: var(--accent, #6ad0ff);
-      letter-spacing: 1px;
-    }
+
     .error-screen {
       text-align: center;
       padding: 60px 20px;
@@ -495,6 +567,20 @@
       font-family: "Courier New", monospace;
       font-size: 12px;
     }
+
+    /* Small screen tweaks */
+    @media (max-width: 520px) {
+      .team-tag { font-size: 18px; letter-spacing: 4px; }
+      .lock-plate { height: 80px; }
+      .dial { width: 42px; height: 64px; }
+      .dial-num { height: 64px; font-size: 32px; }
+      .latch { width: 36px; height: 50px; top: 30%; }
+      .display { font-size: 22px; letter-spacing: 10px; padding: 8px; }
+      .num-btn { font-size: 16px; }
+      .body-hud { left: 8%; right: 8%; top: 36%; bottom: 10%; gap: 8px; }
+      .handle { width: 90px; height: 22px; top: -10px; }
+      .stud { width: 12px; height: 12px; }
+    }
   </style>
 </head>
 <body>
@@ -509,6 +595,7 @@
 
   <div class="case-wrap">
     <div class="case" id="case">
+      <!-- Lid: handle, studs, lock plate, latches -->
       <div class="lid">
         <div class="handle"></div>
         <div class="stud tl"></div><div class="stud tr"></div>
@@ -530,41 +617,49 @@
         <div class="latch left"></div>
         <div class="latch right"></div>
       </div>
+
+      <!-- Interior (revealed when open) -->
       <div class="interior">
         <div class="loot">
           <div class="gold-stack"></div>
-          <div class="loot-label" id="loot-label">★ Score secured ★</div>
+          <div class="loot-label">★ Score secured ★</div>
         </div>
       </div>
+
+      <!-- Body shell -->
       <div class="body-pc">
         <div class="stud tl"></div><div class="stud tr"></div>
         <div class="stud bl"></div><div class="stud br"></div>
+      </div>
+
+      <!-- HUD: display + numpad embedded on the body -->
+      <div class="body-hud" id="body-hud">
+        <div class="display-frame">
+          <div class="display waiting" id="display">- - -</div>
+        </div>
+        <div class="numpad" id="numpad">
+          <button class="num-btn" data-n="1">1</button>
+          <button class="num-btn" data-n="2">2</button>
+          <button class="num-btn" data-n="3">3</button>
+          <button class="num-btn" data-n="4">4</button>
+          <button class="num-btn" data-n="5">5</button>
+          <button class="num-btn" data-n="6">6</button>
+          <button class="num-btn" data-n="7">7</button>
+          <button class="num-btn" data-n="8">8</button>
+          <button class="num-btn" data-n="9">9</button>
+          <button class="num-btn clear" id="clear">Clr</button>
+          <button class="num-btn" data-n="0">0</button>
+          <button class="num-btn submit" id="submit">↵</button>
+        </div>
       </div>
     </div>
     <div class="toast" id="toast">You cracked the code</div>
   </div>
 
-  <div class="hud">
-    <div class="display waiting" id="display">- - -</div>
-    <div class="numpad" id="numpad">
-      <button class="num-btn" data-n="1">1</button>
-      <button class="num-btn" data-n="2">2</button>
-      <button class="num-btn" data-n="3">3</button>
-      <button class="num-btn" data-n="4">4</button>
-      <button class="num-btn" data-n="5">5</button>
-      <button class="num-btn" data-n="6">6</button>
-      <button class="num-btn" data-n="7">7</button>
-      <button class="num-btn" data-n="8">8</button>
-      <button class="num-btn" data-n="9">9</button>
-      <button class="num-btn clear" id="clear">Clr</button>
-      <button class="num-btn" data-n="0">0</button>
-      <button class="num-btn submit" id="submit">↵</button>
-    </div>
-    <div class="meta">
-      <span>Attempts: <strong id="attempts">0</strong></span>
-      <span class="hint-pill">3 digits · 0-9</span>
-      <span>Best: <strong id="best">—</strong></span>
-    </div>
+  <div class="meta">
+    <span>Attempts: <strong id="attempts">0</strong></span>
+    <span class="hint-pill">3 digits · 0-9</span>
+    <span>Best: <strong id="best">—</strong></span>
   </div>
 </div>
 
@@ -587,11 +682,9 @@
     return;
   }
 
-  // Disable controls until team info loads
   const allButtons = document.querySelectorAll(".num-btn");
   allButtons.forEach((b) => (b.disabled = true));
 
-  // Fetch team metadata (name + tagline + accent), but NOT the code.
   fetch("/api/team?id=" + encodeURIComponent(teamId))
     .then((r) => {
       if (!r.ok) throw new Error("not-found");
@@ -599,12 +692,10 @@
     })
     .then((team) => {
       document.documentElement.style.setProperty("--accent", team.accent);
-      // Build a glow color from the accent hex
       const glow = hexToRgba(team.accent, 0.4);
       document.documentElement.style.setProperty("--accent-glow", glow);
       teamTag.textContent = team.name;
       teamTag.classList.remove("loading");
-      // Show tagline in the subtitle, faction-themed
       document.getElementById("heist-sub").textContent = team.tagline + " · 3-digit lock";
       document.title = team.name + " · Crack the Code";
       allButtons.forEach((b) => (b.disabled = false));
@@ -625,14 +716,13 @@
     const [r, g, b] = m.map((h) => parseInt(h, 16));
     return "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
   }
-
   function escapeHtml(s) {
     return s.replace(/[&<>"']/g, (c) => ({
       "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
     })[c]);
   }
 
-  // -------- game logic (only runs once team is verified) --------
+  // -------- game logic --------
   function initGame(team) {
     const caseEl = document.getElementById("case");
     const display = document.getElementById("display");
@@ -647,7 +737,13 @@
     let solved = false;
     let submitting = false;
 
-    // Build dial strips: 0..9
+    // Dial dimensions — match CSS .dial-num height
+    function dialNumHeight() {
+      const el = document.querySelector(".dial-num");
+      return el ? el.offsetHeight : 86;
+    }
+
+    // Build dial strips
     for (let d = 0; d < 3; d++) {
       const strip = document.getElementById("strip-" + d);
       for (let n = 0; n <= 9; n++) {
@@ -699,10 +795,11 @@
     }
     function setDial(i, value, animate) {
       const strip = document.getElementById("strip-" + i);
+      const h = dialNumHeight();
       strip.style.transition = animate
         ? "transform 0.4s cubic-bezier(.34,1.4,.64,1)"
         : "none";
-      strip.style.transform = "translateY(" + (-value * 60 - 30) + "px)";
+      strip.style.transform = "translateY(" + (-value * h - h / 2) + "px)";
     }
     function highlightDial(i) {
       document.querySelectorAll(".dial").forEach((d) => d.classList.remove("active"));
@@ -763,7 +860,7 @@
           renderDisplay("denied");
           deny();
           caseEl.classList.add("shake");
-          setTimeout(() => caseEl.classList.remove("shake"), 500);
+          setTimeout(() => caseEl.classList.remove("shake"), 550);
           setTimeout(() => {
             input = [];
             for (let i = 0; i < 3; i++) {
@@ -772,10 +869,9 @@
             renderDisplay();
             highlightDial(0);
             submitting = false;
-          }, 700);
+          }, 750);
         }
       } catch (err) {
-        // network error — let the player try again
         deny();
         renderDisplay("denied");
         setTimeout(() => {
@@ -785,11 +881,6 @@
           highlightDial(0);
           submitting = false;
         }, 700);
-      } finally {
-        // for the success path we keep submitting=true until reset
-        if (!solved) {
-          // submitting will be flipped back in the timeout above
-        }
       }
     }
 
@@ -832,6 +923,14 @@
     for (let i = 0; i < 3; i++) setDial(i, 0, false);
     renderDisplay();
     highlightDial(0);
+
+    // recalc dial positions on resize (since dial height is responsive)
+    window.addEventListener("resize", () => {
+      for (let i = 0; i < 3; i++) {
+        const v = input[i] !== undefined ? input[i] : 0;
+        setDial(i, v, false);
+      }
+    });
   }
 })();
 </script>
