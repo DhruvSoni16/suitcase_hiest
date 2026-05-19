@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Choose Your Faction · Crack the Code</title>
+  <meta name="description" content="Four factions. Four codes. One suitcase per team." />
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      background: #0a0e1a;
+      color: #e8eef7;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    }
+    body {
+      min-height: 100vh;
+      padding: 40px 20px;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(99, 180, 255, 0.15) 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 100%, rgba(255, 90, 74, 0.10) 0%, transparent 60%),
+        #0a0e1a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .wrap {
+      width: 100%;
+      max-width: 880px;
+      text-align: center;
+    }
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 6px;
+      color: #6ad0ff;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin: 0 0 14px;
+    }
+    h1 {
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 200;
+      letter-spacing: 2px;
+      margin: 0 0 10px;
+      color: #f4f7fc;
+    }
+    h1 strong {
+      font-weight: 600;
+      background: linear-gradient(90deg, #6ad0ff, #ff5a4a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .lead {
+      font-size: 14px;
+      color: #8a98b0;
+      max-width: 540px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+      letter-spacing: 0.5px;
+    }
+    .factions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+    .faction {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      background: rgba(20, 28, 44, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 26px 18px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(.34,1.2,.64,1), border-color 0.35s, box-shadow 0.35s;
+      cursor: pointer;
+      isolation: isolate;
+    }
+    .faction::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, var(--c), transparent 70%);
+      opacity: 0.08;
+      transition: opacity 0.35s;
+      z-index: -1;
+    }
+    .faction:hover {
+      border-color: var(--c);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 30px var(--c-glow);
+    }
+    .faction:hover::before { opacity: 0.18; }
+    .faction-symbol {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid var(--c);
+      border-radius: 50%;
+      color: var(--c);
+      transition: transform 0.35s, box-shadow 0.35s;
+    }
+    .faction:hover .faction-symbol {
+      box-shadow: 0 0 20px var(--c-glow);
+      transform: scale(1.08);
+    }
+    .faction-symbol svg { width: 28px; height: 28px; }
+    .faction-name {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--c);
+      margin: 0 0 4px;
+    }
+    .faction-tag {
+      font-size: 11px;
+      color: #8a98b0;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin: 0 0 14px;
+    }
+    .faction-cta {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: #8a98b0;
+      text-transform: uppercase;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 12px;
+      transition: color 0.3s;
+    }
+    .faction:hover .faction-cta { color: var(--c); }
+    .faction-cta .arrow {
+      display: inline-block;
+      transition: transform 0.3s;
+      margin-left: 4px;
+    }
+    .faction:hover .faction-cta .arrow { transform: translateX(4px); }
+    .footer {
+      font-size: 11px;
+      color: #4a5a73;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 16px;
+    }
+    .footer .divider {
+      display: inline-block;
+      width: 40px;
+      height: 1px;
+      background: #2a3548;
+      vertical-align: middle;
+      margin: 0 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">Crack the Code · Suitcase Heist</p>
+    <h1>Choose your <strong>faction</strong></h1>
+    <p class="lead">Four factions. Four codes. One suitcase per team. Step forward, pick your allegiance, and crack the lock before the others do.</p>
+
+    <div class="factions">
+      <a class="faction" href="/game.html?team=erudite" style="--c: #6ad0ff; --c-glow: rgba(106, 208, 255, 0.25);">
+        <div class="faction-symbol">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 4h7a3 3 0 0 1 3 3v13a2.5 2.5 0 0 0-2.5-2.5H2z"/>
+            <path d="M22 4h-7a3 3 0 0 0-3 3v13a2.5 2.5 0 0 1 2.5-2.5H22z"/>
+          </svg>
+        </div>
+        <div class="faction-name">Erudite</div>
+        <div class="faction-tag">The Intelligent</div>
+        <div class="faction-cta">Enter <span class="arrow">→</span></div>
+      </a>
+
+      <a class="faction" href="/game.html?team=amity" style="--c: #ffd966; --c-glow: rgba(255, 217, 102, 0.25);">
+        <div class="faction-symbol">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a6 6 0 0 1 5.2 9 4 4 0 0 1-2.2 7H9a4 4 0 0 1-2.2-7A6 6 0 0 1 12 2z"/>
+            <line x1="12" y1="18" x2="12" y2="22"/>
+          </svg>
+        </div>
+        <div class="faction-name">Amity</div>
+        <div class="faction-tag">The Peaceful</div>
+        <div class="faction-cta">Enter <span class="arrow">→</span></div>
+      </a>
+
+      <a class="faction" href="/game.html?team=candor" style="--c: #e8eef7; --c-glow: rgba(232, 238, 247, 0.22);">
+        <div class="faction-symbol">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="3" x2="12" y2="21"/>
+            <line x1="4" y1="6" x2="20" y2="6"/>
+            <path d="M4 6l-3 7a4 4 0 0 0 6 0z"/>
+            <path d="M20 6l-3 7a4 4 0 0 0 6 0z"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+          </svg>
+        </div>
+        <div class="faction-name">Candor</div>
+        <div class="faction-tag">The Honest</div>
+        <div class="faction-cta">Enter <span class="arrow">→</span></div>
+      </a>
+
+      <a class="faction" href="/game.html?team=dauntless" style="--c: #ff5a4a; --c-glow: rgba(255, 90, 74, 0.25);">
+        <div class="faction-symbol">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2s4 5 4 9a4 4 0 0 1-8 0c0-2 1-3 1-3s-3 2-3 6a6 6 0 0 0 12 0c0-5-6-12-6-12z"/>
+          </svg>
+        </div>
+        <div class="faction-name">Dauntless</div>
+        <div class="faction-tag">The Brave</div>
+        <div class="faction-cta">Enter <span class="arrow">→</span></div>
+      </a>
+    </div>
+
+    <p class="footer">
+      <span class="divider"></span>
+      One code per faction
+      <span class="divider"></span>
+    </p>
+  </div>
+</body>
+</html>
